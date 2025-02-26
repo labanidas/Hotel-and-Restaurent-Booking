@@ -1,0 +1,13 @@
+{
+  "name": "hotel-and-restaurent-booking-web",
+  "version": "1.0.0",
+  "description": "**Backend**",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend --legacy-peer-deps && npm install --prefix frontend --legacy-peer-deps && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
