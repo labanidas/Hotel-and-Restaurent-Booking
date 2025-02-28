@@ -32,8 +32,7 @@ export const useHotelStore = create((set, get) => ({
     try {
       const res = await axiosInstance.get(`/listings/${id}`);
       set({ hotel: res.data });
-      // console.log(get().hotel);
-      // return res.data;
+      console.log(get().hotel);
     } catch (error) {
       toast.error("Error fetching hotel");
       console.log(error);
@@ -41,7 +40,6 @@ export const useHotelStore = create((set, get) => ({
     } finally {
       set({ isGettingHotels: false });
     }
-    // return null;
   },
 
 
@@ -54,8 +52,9 @@ export const useHotelStore = create((set, get) => ({
       try {
         const res = await axiosInstance.post("/listings", data);
         toast.success("Hotel created successfully");
-        set({ hotels: [...hotels, res.data] });
-        navigate(`/listing/${res.data._id}`);
+        // set({ hotels: [...hotels, res.data] });
+        console.log(res.data._id)
+        navigate(`/dashboard/listing/${res.data._id}`);
       } catch (error) {
         toast.error(error.response.data.message);
       //   set({ hotels: [] });

@@ -4,17 +4,29 @@ import { useParams } from 'react-router-dom';
 
 const ListingPage = () => {
   const { id } = useParams();
-  const { isGettingHotels, getSingleHotel, hotel } = useHotelStore();  
+  const { isGettingHotels, getSingleHotel } = useHotelStore();  
+  const hotel = useHotelStore((state) => state.hotel);
+
   useEffect(() => {
-    if (id) {
-      getSingleHotel(id);
+    async function fetchData() {
+      console.log(id)
+      if (id) {
+       await  getSingleHotel(id);
+      }
     }
+    fetchData();
   }, [id, getSingleHotel]);
   
 
-  if (isGettingHotels && !hotel) return <h1> Loading... </h1>;
+  useEffect(() => {
+    console.log("Updated hotel state:", hotel); 
+  }, [hotel]); 
 
-  return (
+
+  if (isGettingHotels || !hotel) return <h1> Loading... </h1>;
+ 
+  if(hotel) 
+    return (
     <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>

@@ -44,7 +44,7 @@ function App() {
         {/* Dashboard Layout with Nested Routes */}
         <Route path="/dashboard/*" element={authUser? <Dashboard />: <Navigate to="/login" /> }>
           <Route index element={<Listings />} />  {/* Default route */}
-          <Route path="new-listing" element={<CreateListing />} />
+          <Route path="new-listing" element={authUser && authUser.role == "Vendor" ? <CreateListing />: <Navigate to="/dashboard" /> } />
           <Route path="listing/:id" element={<ListingPage />} />
           <Route path="manage-bookings" element={<ManageBookings />} />
         </Route>
